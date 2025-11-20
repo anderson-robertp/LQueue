@@ -39,6 +39,11 @@ public static class CapacityExperiment
         }
         Console.WriteLine("Experiment complete.");
     }
+    // Based on the experiment, the capacity of the queue doubles every time it reaches capacity.
+    // The internal list doubles in size every time it reaches capacity.
+    // This gives a linear growth curve. The capacity does not grow by 1 every time it reaches capacity.
+    // The capacity doubles every time it reaches its limit size.
+    // 
 }
 
 
