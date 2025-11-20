@@ -1,9 +1,12 @@
-﻿namespace LQueue;
+namespace LQueue;
+
+using LQueue;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        PerformanceAnalysis.Run();
+        CapacityExperiment.Run();
     }
 }
