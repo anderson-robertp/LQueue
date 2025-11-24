@@ -1,7 +1,6 @@
 namespace LQueue;
 
 using System;
-using System.Diagnostics;
 
 public static class CapacityExperiment
 {
@@ -18,15 +17,15 @@ public static class CapacityExperiment
     {
         Console.WriteLine("=== Capacity Experiment ===");
         
-        // Create a queue with initial capacity of 10.
+        // Create a queue with the initial capacity of 10.
         var q = new LQueue<int>();
         
         // Measure the capacity of the queue as it grows.
         int previousCapacity = q.Capacity;
         Console.WriteLine($"Initial capacity: {previousCapacity}");
         
-        // Enqueue 10,000 items.
-        for (int i = 0; i < 10_000; i++)
+        // Enqueue 10 items.
+        for (int i = 0; i < 10; i++)
         {
             // Enqueue an item and check the capacity.
             q.Enqueue(i);

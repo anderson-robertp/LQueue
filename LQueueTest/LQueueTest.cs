@@ -6,9 +6,14 @@ using System;
 
 public class Tests
 {
-    // Enqueue should add an item to the end of the queue
-    // and increase the count by one.
-    // Peek should return the item at the front of the queue.
+    /// <summary>
+    /// Test Purpose: Enqueue adds items to the back of the queue.
+    /// The count should increase by one for each item added.
+    /// Peek should return the item at the front of the queue.
+    ///
+    /// Expected Result:
+    /// After enqueueing two items, peek should return 1 and the count should be 2.
+    /// </summary>
     [Test]
     public void EnqueueAddItemsAndPeekReturnsFirstItem()
     {
@@ -19,8 +24,12 @@ public class Tests
         Assert.That(queue.Peek(), Is.EqualTo(1), "Peek should return 1.");
         Assert.That(queue.Count, Is.EqualTo(2), "Count should be 2.");
     }
-    // Dequeue should remove and return the item at the front of the queue.
-    // Count should decrease by one.
+    /// <summary>
+    /// Test Purpose: Dequeue removes and returns the item at the front of the queue.
+    ///
+    /// Expected Result:
+    /// Dequeue should return 1 and count should be 1.
+    /// </summary>
     [Test]
     public void DequeueRemovesAndReturnsFirstItem()
     {
@@ -31,7 +40,13 @@ public class Tests
         Assert.That(queue.Dequeue(), Is.EqualTo(1), "Dequeue should return 1.");
         Assert.That(queue.Count, Is.EqualTo(1), "Count should be 1.");
     }
-    // Contains should return true if the queue contains the specified item.
+    
+    /// <summary>
+    /// Test Purpose: Contains returns true if the queue contains the specified item.
+    ///
+    /// Expected Result:
+    /// Contains should return true if the queue contains 1 and false otherwise.
+    /// </summary>
     [Test]
     public void ContainsReturnsTrueIfItemIsContained()
     {
@@ -42,14 +57,26 @@ public class Tests
         Assert.That(queue.Contains(1), Is.True, "Contains should return true.");
         Assert.That(queue.Contains(3), Is.False, "Contains should return false.");
     }
-    // Dequeue should throw an exception if the queue is empty.
+    
+    /// <summary>
+    /// Test Purpose: Dequeue should throw an exception if the queue is empty.
+    ///
+    /// Expected Result:
+    /// Dequeue should throw an exception.
+    /// </summary>
     [Test]
     public void DequeueThrowsExceptionIfQueueIsEmpty()
     {
         var queue = new LQueue<int>();
         Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
     }
-    // Peek should throw an exception if the queue is empty.
+    
+    /// <summary>
+    /// Test Purpose: Peek should throw an exception if the queue is empty.
+    ///
+    /// Expected Result:
+    /// Peek should throw an exception.
+    /// </summary>
     [Test]
     public void PeekThrowsExceptionIfQueueIsEmpty()
     {
