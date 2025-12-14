@@ -22,21 +22,36 @@ public static class PerformanceAnalysis
     /// </summary>
     public static void Run()
     {
+        // Test sizes
         int[] sizes = { 10, 100, 1_000, 10_000, 100_000 };
+        
+        //Number of Trials
+        int trials = 10;
+        
+        // Warms up the JIT compiler.
+        WarmUpJit();
 
         foreach (int size in sizes)
         {
             Console.WriteLine();
             Console.WriteLine($"Running performance analysis for size {size}...");
-            
-            // Prefill queue
-            var q = BuildQueue(size);
+            Console.WriteLine();
 
-            MeasureEnqueue(size);
-            MeasurePeek(size);
-            MeasureContains(size);
-            MeasureDequeue(size);
+            MeasureEnqueue(size, trials);
+            MeasurePeek(size, trials);
+            MeasureContains(size, trials);
+            MeasureDequeue(size, trials);
         }
+    }
+    
+    // Warm up the JIT compiler.
+    private static void WarmUpJit()
+    {
+        var q = new LQueue<int>();
+        q.Enqueue(1);
+        q.Peek();
+        q.Contains(1);
+        q.Dequeue();
     }
 
     /// <summary>
@@ -70,10 +85,9 @@ public static class PerformanceAnalysis
     /// Expected Big-O: O(1) amortized.
     /// Measures a single enqueue when the queue has *size* elements.
     /// </summary>
-    private static void MeasureEnqueue(int size)
+    private static void MeasureEnqueue(int size, int trials)
     {
         long totalTicks = 0;
-        int trials = 10;
 
         for (int i = 0; i < trials; i++)
         {
@@ -91,10 +105,9 @@ public static class PerformanceAnalysis
     /// Expected Big-O: O(1)
     /// Measures peek on a queue of fixed size.
     /// </summary>
-    private static void MeasurePeek(int size)
+    private static void MeasurePeek(int size, int trials)
     {
         long totalTicks = 0;
-        int trials = 10;
 
         for (int i = 0; i < trials; i++)
         {
@@ -112,10 +125,9 @@ public static class PerformanceAnalysis
     /// Expected Big-O: O(n)
     /// Measures contains using the *last element*, worst-case.
     /// </summary>
-    private static void MeasureContains(int size)
+    private static void MeasureContains(int size, int trials)
     {
         long totalTicks = 0;
-        int trials = 10;
 
         for (int i = 0; i < trials; i++)
         {
@@ -133,10 +145,9 @@ public static class PerformanceAnalysis
     /// Expected Big-O: O(n) because List<T>.RemoveAt(0) shifts all elements.
     /// Measures one dequeue on a queue of *size*.
     /// </summary>
-    private static void MeasureDequeue(int size)
+    private static void MeasureDequeue(int size, int trials)
     {
         long totalTicks = 0;
-        int trials = 10;
 
         for (int i = 0; i < trials; i++)
         {
